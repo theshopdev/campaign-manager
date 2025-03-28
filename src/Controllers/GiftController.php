@@ -19,7 +19,7 @@ class GiftController extends Controller
 
     public function create()
     {
-        $products = $this->getProducts();
+        $products = json_decode(Storage::get('campaign-manager/products.json'), true);
 
         return view('campaign-manager::gift.create', compact('products'));
     }
@@ -35,7 +35,7 @@ class GiftController extends Controller
 
     public function edit(Request $request, int $id)
     {
-        $products = $this->getProducts();
+        $products = json_decode(Storage::get('campaign-manager/products.json'), true);
 
         $item = CampaignManagerGift::find($id);
 
@@ -74,30 +74,5 @@ class GiftController extends Controller
         $data['product_name'] = $products[$data['product_uuid']]['name'];
 
         return $data;
-    }
-
-    private function getProducts(): array
-    {
-        $products = [];
-
-        $productsRequest = Http::asJson()
-            ->acceptJson()
-            ->withToken(request()->cookie(config('theshop-campaign-manager.auth_cookie_name')))
-            ->get('https://'.config('theshop-campaign-manager.host').'/api/admin/products');
-
-        if ($productsRequest->successful()) {
-            $items = $productsRequest->json()['items'] ?? [];
-
-            foreach ($items as $item) {
-                $products[$item['uuid']] = [
-                    'uuid' => $item['uuid'],
-                    'name' => $item['name'],
-                ];
-            }
-        }
-
-        Storage::put('campaign-manager/products.json', json_encode($products));
-
-        return $products;
     }
 }
