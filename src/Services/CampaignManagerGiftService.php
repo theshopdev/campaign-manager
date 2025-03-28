@@ -14,11 +14,11 @@ class CampaignManagerGiftService
             ->whereNotIn('product_uuid', $itemsInCart)
             ->where(function (Builder $query) {
                 $query->whereNull('valid_from')
-                    ->orWhereDate('valid_from', '>=', Carbon::today());
+                    ->orWhereDate('valid_from', '<=', Carbon::today());
             })
             ->where(function (Builder $query) {
                 $query->whereNull('valid_to')
-                    ->orWhereDate('valid_to', '<=', Carbon::today());
+                    ->orWhereDate('valid_to', '>=', Carbon::today());
             })
             ->orderByDesc('score')
             ->pluck('product_uuid')->toArray();
