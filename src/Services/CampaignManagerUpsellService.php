@@ -6,7 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use TheShop\CampaignManager\Models\CampaignManagerUpsell;
 
-class CampaignManagerGiftService
+class CampaignManagerUpsellService
 {
     public static function getUUIDs(array $itemsInCart, ?int $limit = null): array
     {
