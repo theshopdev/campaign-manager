@@ -8,7 +8,7 @@ use TheShop\CampaignManager\Models\CampaignManagerUpsell;
 
 class CampaignManagerGiftService
 {
-    public static function getUUIDs(array $itemsInCart): array
+    public static function getUUIDs(array $itemsInCart, ?int $limit = null): array
     {
         return CampaignManagerUpsell::query()
             ->whereNotIn('product_uuid', $itemsInCart)
@@ -19,6 +19,9 @@ class CampaignManagerGiftService
             ->where(function (Builder $query) {
                 $query->whereNull('valid_to')
                     ->orWhereDate('valid_to', '>=', Carbon::today());
+            })
+            ->when(!is_null($limit), function ($q) use ($limit) {
+                $q->limit($limit);
             })
             ->orderByDesc('score')
             ->pluck('product_uuid')->toArray();
