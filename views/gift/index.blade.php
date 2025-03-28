@@ -27,7 +27,12 @@
 					</x-campaign-manager::table-column-head>
 					@foreach(config('theshop-campaign-manager.currencies') as $currency)
 						<x-campaign-manager::table-column-head>
-							Hranica {{str()->upper($currency)}}
+							Minimálna hranica v {{str()->upper($currency)}}
+						</x-campaign-manager::table-column-head>
+					@endforeach
+					@foreach(config('theshop-campaign-manager.currencies') as $currency)
+						<x-campaign-manager::table-column-head>
+							Maximálna hranica v {{str()->upper($currency)}}
 						</x-campaign-manager::table-column-head>
 					@endforeach
 					<x-campaign-manager::table-column-head>
@@ -44,6 +49,11 @@
 						@foreach(config('theshop-campaign-manager.currencies') as $currency)
 							<x-campaign-manager::table-column>
 								{{$item['minimum_spend'][$currency]}}
+							</x-campaign-manager::table-column>
+						@endforeach
+						@foreach(config('theshop-campaign-manager.currencies') as $currency)
+							<x-campaign-manager::table-column>
+								{{$item['maximum_spend'][$currency]}}
 							</x-campaign-manager::table-column>
 						@endforeach
 						<x-campaign-manager::table-column>

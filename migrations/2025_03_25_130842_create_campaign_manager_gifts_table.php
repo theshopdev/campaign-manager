@@ -13,6 +13,7 @@ return new class extends Migration
             $table->string('product_uuid');
             $table->string('product_name');
             $table->json('minimum_spend')->nullable();
+            $table->json('maximum_spend')->nullable();
             $table->timestamps();
         });
     }
