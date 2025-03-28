@@ -10,3 +10,5 @@ THESHOP_CAMPAIGN_MANAGER_HOST=theshop.example.com
 4. Run `php artisan migrate`
 
 ## Usage
+
+Visit `/campaign-manager` URL to access application.
