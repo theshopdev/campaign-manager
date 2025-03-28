@@ -67,7 +67,7 @@ class GiftController extends Controller
         $data = $request->validate([
             'product_uuid'  => ['required'],
             'minimum_spend' => ['required'],
-            'maximum_spend' => ['present', 'array'],
+            'maximum_spend' => ['required'],
         ]);
 
         $products = json_decode(Storage::get('campaign-manager/products.json'), true);

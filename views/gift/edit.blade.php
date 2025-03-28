@@ -55,7 +55,7 @@
 						<label for="maximum_spend_{{$currency}}" class="form-label">Maximálna hranica
 							v {{str()->upper($currency)}}</label>
 						<input type="number" value="{{$item['maximum_spend'][$currency]}}" min="-1" step="0.01" name="maximum_spend[{{$currency}}]"
-						       id="maximum_spend_{{$currency}}" class="form-input">
+						       id="maximum_spend_{{$currency}}" class="form-input" required>
 						<span class="form-info">Maximálna hranica pre pridanie do košíka (ak nie je ohraničené, vložte -1)</span>
 					</div>
 				@endforeach
