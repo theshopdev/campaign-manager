@@ -5,7 +5,7 @@
 	<div class="rounded-lg bg-blue-300 text-center py-4 lg:px-4 mb-4">
 		<div class="p-2 bg-blue-500 items-center text-indigo-100 leading-none lg:rounded-full flex lg:inline-flex" role="alert">
 			<span class="flex rounded-full bg-blue-700 uppercase px-2 py-1 text-xs font-bold mr-3">Informácia</span>
-			<span class="font-light mr-2 text-left flex-auto">Pre vytvorenie darčeka v TheShop je potrebné vytvoriť duplicitný produkt s rovnakou skladovou kartou ako je štandardný produkt a nulovou cenou.</span>
+			<span class="font-light mr-2 leading-6 text-left flex-auto">Pre vytvorenie darčeka v TheShop je potrebné vytvoriť duplicitný produkt s rovnakou skladovou kartou ako je štandardný produkt a nulovou cenou.</span>
 		</div>
 	</div>
 	

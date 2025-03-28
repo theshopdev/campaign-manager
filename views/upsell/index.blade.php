@@ -1,6 +1,12 @@
 @extends('campaign-manager::layout')
 
 @section('content')
+	<div class="rounded-lg bg-blue-300 text-center py-4 lg:px-4 mb-4">
+		<div class="p-2 bg-blue-500 items-center text-indigo-100 leading-none lg:rounded-full flex lg:inline-flex" role="alert">
+			<span class="flex rounded-full bg-blue-700 uppercase px-2 py-1 text-xs font-bold mr-3">Informácia</span>
+			<span class="font-light mr-2 leading-6 text-left flex-auto">Položky v upselli sa zoraďujú podľa priradeného skóre. Pokiaľ sa položka z upsellu nachádza v košíku, do upsellu sa vloží ďalší v poradí.</span>
+		</div>
+	</div>
 	
 	<x-campaign-manager::card>
 		<x-campaign-manager::card-header
