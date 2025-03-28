@@ -14,16 +14,29 @@
 			<form class="form" action="{{route('campaign-manager.gift.update', [$item])}}" method="POST">
 				@method('PUT')
 				@csrf
-				<div>
-					<label for="product_uuid" class="form-label">Produkt</label>
+				<div x-data="{searchQuery: '',items: @js($products), selected: @js(['uuid' => $item['product_uuid'], 'name' => $item['product_name']])}">
+					<div class="mb-4">
+						<label for="product_name" class="form-label">Produkt</label>
+						<input type="text" x-model="selected.name" disabled name="product_name" id="product_name" class="form-input !bg-gray-100" required>
+						<input type="hidden" x-model="selected.uuid" name="product_uuid" id="product_uuid" required>
+					</div>
 					
-					<select id="product_uuid" name="product_uuid" class="form-input">
-						@foreach($products as $product)
-							<option @if($item['product_uuid'] === $product['uuid']) selected
-							        @endif value="{{$product['uuid']}}">{{$product['name']}}</option>
-						@endforeach
-					</select>
+					<input type="text" placeholder="Hľadať" x-model="searchQuery" id="product_search" class="form-input">
 					<span class="form-info">Vyberte produkt zo zoznamu produktov, ktorý sa bude zobrazovať</span>
+					
+					<!-- Filtered Items -->
+					<ul class="h-[200px] overflow-y-scroll mt-4">
+						<template
+								x-for="item in items"
+								:key="item.uuid">
+							<li
+									class="cursor-pointer hover:bg-indigo-600 hover:text-white p-1"
+									x-show="item.name.toLowerCase().includes(searchQuery.toLowerCase())"
+									x-on:click="selected = item"
+									x-text="item.name">
+							</li>
+						</template>
+					</ul>
 				</div>
 				
 				@foreach(config('theshop-campaign-manager.currencies') as $currency)
