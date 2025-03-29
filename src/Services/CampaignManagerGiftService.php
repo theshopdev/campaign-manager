@@ -19,8 +19,11 @@ class CampaignManagerGiftService
         }
 
         return CampaignManagerGift::query()
-            ->whereRaw("CAST(JSON_EXTRACT(minimum_spend, '$.$currency') AS UNSIGNED) >= ?", [$value])
-            ->whereRaw("CAST(JSON_EXTRACT(maximum_spend, '$.$currency') AS UNSIGNED) <= ?", [$value])
+            ->whereRaw("CAST(JSON_EXTRACT(minimum_spend, '$.$currency') AS UNSIGNED) <= ?", [$value])
+            ->where(function($query) use ($currency, $value) {
+                $query->whereRaw("CAST(JSON_EXTRACT(maximum_spend, '$.$currency') AS UNSIGNED) >= ?", [$value])
+                    ->orWhereRaw("CAST(JSON_EXTRACT(maximum_spend, '$.$currency') AS UNSIGNED) = -1");
+            })
             ->pluck('product_uuid')
             ->toArray();
     }
