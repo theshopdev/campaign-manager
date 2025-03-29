@@ -27,6 +27,12 @@ class CampaignManagerGiftService
             ->pluck('product_uuid')
             ->toArray();
     }
+    public static function isGift(string $uuid): bool
+    {
+        return CampaignManagerGift::query()
+            ->where('product_uuid', $uuid)
+            ->exists();
+    }
 
     public static function getRanges(string $currency)
     {
