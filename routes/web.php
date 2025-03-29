@@ -11,7 +11,7 @@ use TheShop\CampaignManager\Middleware\AuthMiddleware;
 Route::group([
     'middleware' => [AuthMiddleware::class],
 ], static function () {
-    Route::resource('gift', UpsellController::class);
+    Route::resource('gift', GiftController::class);
     Route::resource('upsell', UpsellController::class);
 
     Route::get('/product/download', ProductController::class)->name('product.download');
