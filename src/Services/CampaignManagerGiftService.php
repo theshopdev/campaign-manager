@@ -10,6 +10,19 @@ use TheShop\CampaignManager\Models\CampaignManagerUpsell;
 
 class CampaignManagerGiftService
 {
+    public static function getUUIDs(string $currency): array
+    {
+        $currency = Str::lower($currency);
+
+        if (!in_array($currency, config('theshop-campaign-manager.currencies'))) {
+            return [];
+        }
+
+        return CampaignManagerGift::query()
+            ->pluck('product_uuid')
+            ->toArray();
+    }
+
     public static function getAvailableUUIDs(float $value, string $currency): array
     {
         $currency = Str::lower($currency);
@@ -27,6 +40,7 @@ class CampaignManagerGiftService
             ->pluck('product_uuid')
             ->toArray();
     }
+
     public static function isGift(string $uuid): bool
     {
         return CampaignManagerGift::query()
@@ -43,7 +57,7 @@ class CampaignManagerGiftService
         }
 
         return CampaignManagerGift::query()
-            ->selectRaw("CAST(JSON_EXTRACT(minimum_spend, '$.eur') AS UNSIGNED) as range")
+            ->selectRaw("CAST(JSON_EXTRACT(minimum_spend, '$.$currency') AS UNSIGNED) as range")
             ->groupBy('range')
             ->orderBy('range')
             ->pluck('range')
