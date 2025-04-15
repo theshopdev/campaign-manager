@@ -22,6 +22,20 @@ class CampaignManagerGiftService
             ->pluck('product_uuid')
             ->toArray();
     }
+    public static function getGifts(string $currency): array
+    {
+        $currency = Str::lower($currency);
+
+        if (!in_array($currency, config('theshop-campaign-manager.currencies'))) {
+            return [];
+        }
+
+        return CampaignManagerGift::query()
+            ->orderByRaw("CAST(JSON_EXTRACT(minimum_spend, '$.$currency') AS UNSIGNED)")
+            ->get()
+            ->keyBy('product_uuid')
+            ->toArray();
+    }
 
     public static function getAvailableUUIDs(float $value, string $currency): array
     {
