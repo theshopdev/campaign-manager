@@ -68,6 +68,7 @@ class GiftController extends Controller
             'product_uuid'  => ['required'],
             'minimum_spend' => ['required'],
             'maximum_spend' => ['required'],
+            'is_concept' => ['boolean'],
         ]);
 
         $products = json_decode(Storage::get('campaign-manager/products.json'), true);

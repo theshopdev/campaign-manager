@@ -25,6 +25,9 @@
 					<x-campaign-manager::table-column-head>
 						Produkt
 					</x-campaign-manager::table-column-head>
+					<x-campaign-manager::table-column-head>
+						Koncept
+					</x-campaign-manager::table-column-head>
 					@foreach(config('theshop-campaign-manager.currencies') as $currency)
 						<x-campaign-manager::table-column-head>
 							Minimálna hranica v {{str()->upper($currency)}}
@@ -45,6 +48,9 @@
 					<x-campaign-manager::table-row>
 						<x-campaign-manager::table-column>
 							{{$item['product_name']}}
+						</x-campaign-manager::table-column>
+						<x-campaign-manager::table-column>
+							{{$item['is_concept'] === 1 ? 'Áno' : 'Nie'}}
 						</x-campaign-manager::table-column>
 						@foreach(config('theshop-campaign-manager.currencies') as $currency)
 							<x-campaign-manager::table-column>

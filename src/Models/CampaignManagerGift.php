@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $product_name
  * @property array $minimum_spend
  * @property array $maximum_spend
+ * @property boolean $is_concept
  */
 
 class CampaignManagerGift extends Model
@@ -27,6 +28,7 @@ class CampaignManagerGift extends Model
         'product_name',
         'minimum_spend',
         'maximum_spend',
+        'is_concept'
     ];
 
     protected function casts(): array
@@ -34,6 +36,7 @@ class CampaignManagerGift extends Model
         return [
             'minimum_spend' => 'json',
             'maximum_spend' => 'json',
+            'is_concept' => 'boolean',
         ];
     }
 }

@@ -19,6 +19,7 @@ class CampaignManagerGiftService
         }
 
         return CampaignManagerGift::query()
+            ->where('is_active', false)
             ->pluck('product_uuid')
             ->toArray();
     }
@@ -31,6 +32,7 @@ class CampaignManagerGiftService
         }
 
         return CampaignManagerGift::query()
+            ->where('is_active', false)
             ->orderByRaw("CAST(JSON_EXTRACT(minimum_spend, '$.$currency') AS UNSIGNED)")
             ->get()
             ->keyBy('product_uuid')
@@ -46,6 +48,7 @@ class CampaignManagerGiftService
         }
 
         return CampaignManagerGift::query()
+            ->where('is_active', false)
             ->whereRaw("CAST(JSON_EXTRACT(minimum_spend, '$.$currency') AS UNSIGNED) <= ?", [$value])
             ->where(function($query) use ($currency, $value) {
                 $query->whereRaw("CAST(JSON_EXTRACT(maximum_spend, '$.$currency') AS UNSIGNED) >= ?", [$value])
@@ -58,6 +61,7 @@ class CampaignManagerGiftService
     public static function isGift(string $uuid): bool
     {
         return CampaignManagerGift::query()
+            ->where('is_active', false)
             ->where('product_uuid', $uuid)
             ->exists();
     }
@@ -71,6 +75,7 @@ class CampaignManagerGiftService
         }
 
         return CampaignManagerGift::query()
+            ->where('is_active', false)
             ->selectRaw("CAST(JSON_EXTRACT(minimum_spend, '$.$currency') AS UNSIGNED) as range")
             ->groupBy('range')
             ->orderBy('range')

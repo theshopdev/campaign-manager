@@ -38,6 +38,14 @@
 					</ul>
 				</div>
 				
+				<div>
+					<label for="is_concept" class="form-label">Koncept</label>
+					<select name="is_concept" id="is_concept">
+						<option value="1">Áno</option>
+						<option value="0">Nie</option>
+					</select>
+				</div>
+				
 				@foreach(config('theshop-campaign-manager.currencies') as $currency)
 					<div>
 						<label for="minimum_spend_{{$currency}}" class="form-label">Minimálna hranica
