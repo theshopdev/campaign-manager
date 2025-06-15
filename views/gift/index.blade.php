@@ -50,7 +50,7 @@
 							{{$item['product_name']}}
 						</x-campaign-manager::table-column>
 						<x-campaign-manager::table-column>
-							{{$item['is_concept'] === 1 ? 'Áno' : 'Nie'}}
+							{{$item['is_concept'] === true ? 'Áno' : 'Nie'}}
 						</x-campaign-manager::table-column>
 						@foreach(config('theshop-campaign-manager.currencies') as $currency)
 							<x-campaign-manager::table-column>

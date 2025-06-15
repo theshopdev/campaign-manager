@@ -42,8 +42,8 @@
 				<div>
 					<label for="is_concept" class="form-label">Koncept</label>
 					<select name="is_concept" id="is_concept">
-						<option @if($item['is_concept'] === 1) selected @endif value="1">Áno</option>
-						<option @if($item['is_concept'] === 0) selected @endif value="0">Nie</option>
+						<option @if($item['is_concept'] === true) selected @endif value="1">Áno</option>
+						<option @if($item['is_concept'] === false) selected @endif value="0">Nie</option>
 					</select>
 				</div>
 				
