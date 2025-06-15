@@ -61,7 +61,6 @@ class CampaignManagerGiftService
     public static function isGift(string $uuid): bool
     {
         return CampaignManagerGift::query()
-            ->where('is_concept', false)
             ->where('product_uuid', $uuid)
             ->exists();
     }
